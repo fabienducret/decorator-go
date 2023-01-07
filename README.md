@@ -1,8 +1,9 @@
 # decorator-go
 
-Here is an example of pattern decorator helping to extend some capabilities. 
+Here is an example of pattern decorator helping to extend some capabilities.
 
-First we need an interface 
+First we need an interface
+
 ```go
 type Book interface {
 	display() string
@@ -11,6 +12,7 @@ type Book interface {
 
 Then a default implementation.
 We don't want this implementation to log something, it must be pure.
+
 ```go
 type DefaultBook struct {
 	name   string
@@ -23,6 +25,7 @@ func (b DefaultBook) display() string {
 ```
 
 Finally a decorator to log something
+
 ```go
 type VerboseBook struct {
 	original Book
@@ -34,3 +37,15 @@ func (b VerboseBook) display() string {
 }
 ```
 
+Here are the instanciations
+
+```go
+func getBook() Book {
+	return VerboseBook{
+		original: DefaultBook{
+			author: "Yegor Bugayenko",
+			name:   "Elegant Objects, vol 2",
+		},
+	}
+}
+```
