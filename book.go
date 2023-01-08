@@ -6,7 +6,7 @@ import (
 
 // interface
 type Book interface {
-	display() string
+	print() string
 }
 
 // livre par défaut
@@ -15,7 +15,7 @@ type DefaultBook struct {
 	author string
 }
 
-func (b DefaultBook) display() string {
+func (b DefaultBook) print() string {
 	return fmt.Sprintf("%s - %s", b.author, b.name)
 }
 
@@ -24,9 +24,9 @@ type VerboseBook struct {
 	original Book
 }
 
-func (b VerboseBook) display() string {
-	fmt.Println("Book display")
-	return b.original.display()
+func (b VerboseBook) print() string {
+	fmt.Println("Book printing")
+	return b.original.print()
 }
 
 func getBook() Book {
@@ -40,5 +40,5 @@ func getBook() Book {
 
 func main() {
 	book := getBook()
-	fmt.Println(book.display())
+	fmt.Println(book.print())
 }
